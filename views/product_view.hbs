@@ -1,20 +1,22 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>CRUD Node.js and Mysql</title>
+	<title>Shipping DB</title>
   <link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
   <div class="container">
     <h2>Product List</h2>
-		<button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Add New</button>
+		<button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Tambah Shipping</button>
     <table class="table table-striped" id="mytable">
       <thead>
         <tr>
-          <th>Product ID</th>
-          <th>Product Name</th>
-          <th>Price</th>
-          <th>Action</th>
+          <th>Produk ID</th>
+          <th>Nama Produk</th>
+          <th>Dikirim Dari</th>
+          <th>Dikirim Ke</th>
+          <th>Penerima</th>
+          <th>Harga</th>
         </tr>
       </thead>
       <tbody>
@@ -22,9 +24,12 @@
         <tr>
           <td>{{ product_id }}</td>
           <td>{{ product_nama }}</td>
+              <td>{{ product_dari }}</td>
+                  <td>{{ product_ke }}</td>
+                      <td>{{ product_penerima }}</td>
           <td>{{ product_harga }}</td>
           <td>
-            <a href="javascript:void(0);" class="btn btn-sm btn-info edit" data-id="{{ product_id }}" data-product_nama="{{ product_nama }}" data-product_harga="{{ product_harga }}">Edit</a>
+            <a href="javascript:void(0);" class="btn btn-sm btn-warning edit" data-id="{{ product_id }}" data-product_nama="{{ product_nama }}"data-product_dari="{{ product_dari }}"data-product_ke="{{ product_ke }}"data-product_penerima="{{ product_penerima }}" data-product_harga="{{ product_harga }}">Edit</a>
             <a href="javascript:void(0);" class="btn btn-sm btn-danger delete" data-id="{{ product_id }}">Delete</a>
           </td>
         </tr>
@@ -46,11 +51,21 @@
              </div>
              <div class="modal-body">
                <div class="form-group">
-                   <input type="text" name="product_nama" class="form-control" placeholder="Product Name" required>
+                   <input type="text" name="product_nama" class="form-control" placeholder="Nama Poduk" required>
+               </div>
+
+                <div class="form-group">
+                   <input type="text" name="product_dari" class="form-control" placeholder="Dikirim Dari" required>
+               </div>
+                <div class="form-group">
+                   <input type="text" name="product_ke" class="form-control" placeholder="Dikirim Ke" required>
+               </div>
+                <div class="form-group">
+                   <input type="text" name="product_penerima" class="form-control" placeholder="Nama Penerima" required>
                </div>
 
                <div class="form-group">
-                   <input type="text" name="product_harga" class="form-control" placeholder="Price" required>
+                   <input type="text" name="product_harga" class="form-control" placeholder="Harga" required>
                </div>
              </div>
              <div class="modal-footer">
@@ -78,6 +93,15 @@
                   <input type="text" name="product_nama" class="form-control product_nama" placeholder="Product Name" required>
               </div>
 
+               <div class="form-group">
+                   <input type="text" name="product_dari" class="form-control product_dari" placeholder="Dikirim Dari" required>
+               </div>
+                <div class="form-group">
+                   <input type="text" name="product_ke" class="form-control product_ke" placeholder="Dikirim Ke" required>
+               </div>
+                <div class="form-group">
+                   <input type="text" name="product_penerima" class="form-control product_penerima" placeholder="Nama Penerima" required>
+               </div>
               <div class="form-group">
                   <input type="text" name="product_harga" class="form-control harga" placeholder="Price" required>
               </div>
@@ -122,9 +146,15 @@
       $('#mytable').on('click','.edit',function(){
         var product_id = $(this).data('id');
         var product_nama = $(this).data('product_nama');
+                var product_dari = $(this).data('product_dari');
+                        var product_ke = $(this).data('product_ke');
+                                var product_penerima = $(this).data('product_penerima');
         var product_harga = $(this).data('product_harga');
         $('#EditModal').modal('show');
         $('.product_nama').val(product_nama);
+         $('.product_dari').val(product_dari);
+          $('.product_ke').val(product_ke);
+           $('.product_penerima').val(product_penerima);
         $('.harga').val(product_harga);
         $('.product_id').val(product_id);
       });

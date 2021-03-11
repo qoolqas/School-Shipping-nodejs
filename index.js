@@ -46,7 +46,7 @@ app.get('/',(req, res) => {
  
 //route for insert data
 app.post('/save',(req, res) => {
-  let data = {product_nama: req.body.product_nama, product_harga: req.body.product_harga};
+  let data = {product_nama: req.body.product_nama,product_dari: req.body.product_dari,product_ke: req.body.product_ke,product_penerima: req.body.product_penerima, product_harga: req.body.product_harga};
   let sql = "INSERT INTO product SET ?";
   let query = conn.query(sql, data,(err, results) => {
     if(err) throw err;
@@ -56,7 +56,7 @@ app.post('/save',(req, res) => {
  
 //route for update data
 app.post('/update',(req, res) => {
-  let sql = "UPDATE product SET product_name='"+req.body.product_nama+"', product_price='"+req.body.product_harga+"' WHERE product_id="+req.body.id;
+  let sql = "UPDATE product SET product_nama='"+req.body.product_nama+"', product_dari='"+req.body.product_dari+"', product_ke='"+req.body.product_ke+"', product_penerima='"+req.body.product_penerima+"', product_harga='"+req.body.product_harga+"' WHERE product_id="+req.body.id;
   let query = conn.query(sql, (err, results) => {
     if(err) throw err;
     res.redirect('/');
@@ -74,5 +74,5 @@ app.post('/delete',(req, res) => {
  
 //server listening
 app.listen(8000, () => {
-  console.log('Server is running at port 8000');
+  console.log('Server is running at port 8080');
 });
